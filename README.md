@@ -6,7 +6,10 @@ de données GPS/GNSS en temps réel, de traces et de succès. En ligne sur
 
 Site statique bilingue (français / anglais) en HTML / CSS / JavaScript vanilla. Aucune
 dépendance, aucun build, aucune ressource externe : polices et badges des stores sont
-hébergés avec le site, qui ne fait aucune requête tierce.
+hébergés avec le site. Seule exception : le script de statistiques Umami (auto-hébergé sur
+`umami.matthieu.app`, sans cookie) chargé en `defer` dans `fr/index.html` et `en/index.html` ;
+le site fonctionne sans lui. `data-domains` limite le comptage au domaine de prod, les aperçus
+locaux ne sont donc pas comptés.
 
 ## Contenu
 

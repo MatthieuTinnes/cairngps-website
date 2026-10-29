@@ -5,7 +5,8 @@ with code in this repository.
 
 Static, bilingual (French / English) marketing site for the CairnGPS Android app, in vanilla
 HTML / CSS / JavaScript: no dependency, no build step, no external resource — fonts and store
-badges are self-hosted and the site makes no third-party request. The project context (contents,
+badges are self-hosted. The only exception is the self-hosted, cookie-less Umami tracker
+(`umami.matthieu.app`) loaded with `defer` in both pages: the site works without it. The project context (contents,
 local preview, deployment) is in the [README.md](README.md) (in French): read it first, and keep
 it up to date when a change affects the structure, the conventions or the deployment.
 
@@ -19,7 +20,7 @@ it up to date when a change affects the structure, the conventions or the deploy
   `chore: …`, `ci: …`), in English, lowercase imperative subject, no gitmoji. Pull request titles
   and descriptions are in English too.
 - No framework, no package manager, no external CDN or font service: a change that would add a
-  dependency or a third-party request needs to be discussed first.
+  dependency or another third-party request needs to be discussed first.
 - After editing `styles.css`, `globe.js` or `site.js`, bump the `?v=` parameter of the matching
   tag in both pages (and in `404.html` for the stylesheet) so browsers fetch the new version.
 - Claims about the app (achievement count, constellations, features) must match the CairnGPS
