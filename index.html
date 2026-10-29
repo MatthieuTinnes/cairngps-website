@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CairnGPS</title>
+  <meta name="description" content="CairnGPS — GNSS receiver and hiking logbook for Android. Récepteur GNSS et carnet de randonnée pour Android.">
+  <meta name="theme-color" content="#0d3b30">
+  <link rel="canonical" href="https://cairngps.matthieu.app/">
+  <link rel="alternate" hreflang="fr" href="https://cairngps.matthieu.app/fr/">
+  <link rel="alternate" hreflang="en" href="https://cairngps.matthieu.app/en/">
+  <link rel="alternate" hreflang="x-default" href="https://cairngps.matthieu.app/">
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <script>
+    // Language picked in the switcher first, then the browser's; English otherwise.
+    (function () {
+      var lang = null;
+      try { lang = localStorage.getItem('lang'); } catch (e) {}
+      if (lang !== 'fr' && lang !== 'en') {
+        var nav = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+        lang = nav.toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+      }
+      location.replace(lang + '/');
+    })();
+  </script>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0d3b30; color: #f3ebdd; font-family: system-ui, sans-serif; }
+    nav { display: flex; gap: 24px; font-size: 18px; }
+    a { color: #f3ebdd; }
+  </style>
+</head>
+<body>
+  <nav aria-label="Language / Langue">
+    <a href="fr/" hreflang="fr" lang="fr">Français</a>
+    <a href="en/" hreflang="en">English</a>
+  </nav>
+</body>
+</html>

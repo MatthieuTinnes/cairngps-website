@@ -1,0 +1,158 @@
+name: Build & Deploy
+
+# Every commit on main is deployed to prod: no version tag, no preprod.
+# The image is built and pushed to GHCR, then Komodo redeploys the stack.
+# A manual run (workflow_dispatch) rebuilds and redeploys main: that's how the
+# site is deployed for the first time, or redeployed without a new commit.
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md']
+  workflow_dispatch:
+
+# Two deploys must never overlap; the second one waits for the first instead of
+# cancelling it in the middle of `up`.
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+env:
+  # Number of `main-<sha>` images kept, on top of the currently deployed one.
+  IMAGES_TO_KEEP: 10
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      version_tag: ${{ steps.meta.outputs.version_tag }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      # `main-<short sha>`, in addition to `latest`: lets a previous build be
+      # redeployed (IMAGE_TAG in the Komodo stack environment).
+      - name: Set image tags
+        id: meta
+        env:
+          SHA: ${{ github.sha }}
+        run: |
+          echo "version_tag=main-${SHA::7}"           >> "$GITHUB_OUTPUT"
+          echo "image=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v4
+
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # provenance/sbom disabled: they add untagged manifests that the cleanup
+      # below would delete, which would break the image.
+      - name: Build & push
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          provenance: false
+          sbom: false
+          tags: |
+            ${{ steps.meta.outputs.image }}:latest
+            ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.version_tag }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://cairngps.matthieu.app
+
+    steps:
+      # Komodo redeploys the `cairngps-website` stack:
+      # it fetches the compose of main, pulls the image, then runs `up`. The
+      # request is signed with HMAC SHA-256 like a GitHub webhook: without the
+      # signature Komodo does nothing, and it only accepts deploying this
+      # stack. The Komodo host is a secret too, to keep it out of the public
+      # repository.
+      # Komodo replies as soon as the signature is validated: the deploy result
+      # is followed in Komodo, not here.
+      - name: Trigger Komodo deploy
+        env:
+          KOMODO_HOST: ${{ secrets.KOMODO_HOST }}
+          SECRET: ${{ secrets.KOMODO_WEBHOOK_SECRET }}
+        run: |
+          set -euo pipefail
+          if [ -z "$KOMODO_HOST" ] || [ -z "$SECRET" ]; then
+            echo "::error::KOMODO_HOST and KOMODO_WEBHOOK_SECRET must be set in the prod environment"
+            exit 1
+          fi
+          # Komodo only triggers if `ref` is the branch tracked by the stack.
+          body='{"ref":"refs/heads/main"}'
+          signature=$(printf '%s' "$body" | openssl dgst -sha256 -hmac "$SECRET" | awk '{print $NF}')
+          curl -fsS --retry 3 -X POST \
+            "https://${KOMODO_HOST}/listener/github/stack/cairngps-website/deploy" \
+            -H 'Content-Type: application/json' \
+            -H "X-Hub-Signature-256: sha256=$signature" \
+            -d "$body"
+
+      - name: Notify Gotify
+        if: always()
+        env:
+          GOTIFY_HOST: ${{ secrets.GOTIFY_HOST }}
+          GOTIFY_TOKEN: ${{ secrets.GOTIFY_TOKEN }}
+          VERSION: ${{ needs.build.outputs.version_tag }}
+          STATUS: ${{ job.status }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          if [ -z "$GOTIFY_HOST" ]; then
+            echo "GOTIFY_HOST not set, skipping notification"
+            exit 0
+          fi
+          curl -s -X POST "https://${GOTIFY_HOST}/message?token=${GOTIFY_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            -d "{
+              \"title\": \"🚀 CairnGPS website — deploy to prod triggered — ${STATUS}\",
+              \"message\": \"Version: ${VERSION}\\nAuthor: ${ACTOR}\",
+              \"priority\": 5
+            }"
+
+  # Keep only the IMAGES_TO_KEEP latest `main-<sha>` versions, plus the one
+  # carrying `latest`; untagged versions (orphans) are deleted too.
+  cleanup-images:
+    needs: [build, deploy]
+    if: always() && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
+    steps:
+      - name: Delete old image versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: |
+          set -euo pipefail
+          endpoint="/users/$OWNER/packages/container/${REPO,,}/versions"
+
+          ids=$(gh api --paginate "$endpoint" \
+            --jq '.[] | {id, created_at, tags: .metadata.container.tags}' \
+            | jq -rs --argjson keep "$IMAGES_TO_KEEP" '
+                def build: any(.tags[]; startswith("main-"));
+                sort_by(.created_at) | reverse
+                | ([.[] | select(build)][:$keep] | map(.id)) as $kept
+                | .[]
+                | select(.tags == [] or (build and (.id | IN($kept[]) | not)))
+                | select((.tags | index("latest")) | not)
+                | .id' \
+            | sort -u)
+
+          for id in $ids; do
+            echo "Deleting version $id"
+            gh api --method DELETE "$endpoint/$id"
+          done

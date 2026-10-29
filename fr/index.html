@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CairnGPS — Récepteur GNSS et carnet de randonnée pour Android</title>
+  <meta name="description" content="CairnGPS transforme votre téléphone en récepteur GNSS : position précise, satellites en direct sur un globe 3D, traces de randonnée et succès. Gratuit, open source, sans compte, 100 % hors ligne.">
+  <meta name="theme-color" content="#0d3b30">
+  <link rel="canonical" href="https://cairngps.matthieu.app/fr/">
+  <link rel="alternate" hreflang="fr" href="https://cairngps.matthieu.app/fr/">
+  <link rel="alternate" hreflang="en" href="https://cairngps.matthieu.app/en/">
+  <link rel="alternate" hreflang="x-default" href="https://cairngps.matthieu.app/">
+  <link rel="icon" type="image/png" href="../assets/img/icon.png">
+  <link rel="apple-touch-icon" href="../assets/img/icon.png">
+  <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/styles.css?v=2">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CairnGPS">
+  <meta property="og:title" content="CairnGPS — Sachez d’où viennent vos signaux">
+  <meta property="og:description" content="Récepteur GNSS et carnet de randonnée pour Android : satellites en direct sur un globe 3D, traces, boussole et succès. Gratuit, open source, hors ligne.">
+  <meta property="og:url" content="https://cairngps.matthieu.app/fr/">
+  <meta property="og:image" content="https://cairngps.matthieu.app/assets/img/og-fr.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CairnGPS",
+    "operatingSystem": "Android 8.0+",
+    "applicationCategory": "TravelApplication",
+    "inLanguage": ["fr", "en"],
+    "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "downloadUrl": "https://play.google.com/store/apps/details?id=app.matthieu.cairngps",
+    "image": "https://cairngps.matthieu.app/assets/img/icon.png",
+    "author": { "@type": "Person", "name": "Matthieu Tinnes", "url": "https://matthieu.app" }
+  }
+  </script>
+
+  <script src="../assets/js/site.js?v=1" defer></script>
+  <script src="../assets/js/globe.js?v=1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <div class="hero" id="top">
+    <svg class="contours" viewBox="0 0 700 700" aria-hidden="true" focusable="false">
+      <g transform="translate(350 360)" fill="none" stroke="#f3ebdd" stroke-opacity="0.08" stroke-width="1.5">
+        <path vector-effect="non-scaling-stroke" transform="scale(1.6) rotate(8)" d="M0,-200 C120,-210 215,-130 208,-20 C202,90 150,185 20,196 C-110,207 -220,140 -210,10 C-200,-115 -120,-192 0,-200Z"/>
+        <path vector-effect="non-scaling-stroke" transform="translate(8 -6) scale(1.4) rotate(14)" d="M0,-200 C120,-210 215,-130 208,-20 C202,90 150,185 20,196 C-110,207 -220,140 -210,10 C-200,-115 -120,-192 0,-200Z"/>
+        <path vector-effect="non-scaling-stroke" transform="translate(16 -12) scale(1.2) rotate(22)" d="M0,-200 C120,-210 215,-130 208,-20 C202,90 150,185 20,196 C-110,207 -220,140 -210,10 C-200,-115 -120,-192 0,-200Z"/>
+        <path vector-effect="non-scaling-stroke" transform="translate(26 -18) scale(1.0) rotate(30)" d="M0,-200 C120,-210 215,-130 208,-20 C202,90 150,185 20,196 C-110,207 -220,140 -210,10 C-200,-115 -120,-192 0,-200Z"/>
+        <path vector-effect="non-scaling-stroke" transform="translate(36 -24) scale(0.8) rotate(40)" d="M0,-200 C120,-210 215,-130 208,-20 C202,90 150,185 20,196 C-110,207 -220,140 -210,10 C-200,-115 -120,-192 0,-200Z"/>
+        <path vector-effect="non-scaling-stroke" transform="translate(46 -30) scale(0.6) rotate(52)" d="M0,-200 C120,-210 215,-130 208,-20 C202,90 150,185 20,196 C-110,207 -220,140 -210,10 C-200,-115 -120,-192 0,-200Z"/>
+        <path vector-effect="non-scaling-stroke" transform="translate(54 -36) scale(0.4) rotate(64)" d="M0,-200 C120,-210 215,-130 208,-20 C202,90 150,185 20,196 C-110,207 -220,140 -210,10 C-200,-115 -120,-192 0,-200Z"/>
+      </g>
+    </svg>
+
+    <header class="site-header wrap">
+      <a class="brand" href="#top">
+        <img src="../assets/img/icon.png" alt="" width="40" height="40">
+        <span>CairnGPS</span>
+      </a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#vie-privee">Vie privée</a>
+        <a href="#telecharger">Télécharger</a>
+        <div class="lang-switch" role="group" aria-label="Langue">
+          <a href="../fr/" hreflang="fr" lang="fr" data-lang="fr" aria-current="page">FR</a>
+          <a href="../en/" hreflang="en" lang="en" data-lang="en">EN</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero-body wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Récepteur GNSS &amp; carnet de randonnée · Android</p>
+        <h1 id="hero-title">Sachez d’où viennent <em>vos signaux.</em></h1>
+        <p class="lead">CairnGPS transforme votre téléphone en véritable récepteur GNSS&nbsp;: position précise, satellites en direct sur un globe 3D, traces de randonnée et succès à débloquer. Sans compte, sans connexion, sans traqueur.</p>
+        <div class="stores">
+          <a href="https://play.google.com/store/apps/details?id=app.matthieu.cairngps"><img src="../assets/img/badges/google-play-fr.png" alt="Disponible sur Google Play" width="646" height="250"></a>
+          <a href="https://f-droid.org/packages/app.matthieu.cairngps/"><img src="../assets/img/badges/fdroid-fr.png" alt="Disponible sur F-Droid" width="646" height="250"></a>
+        </div>
+        <p class="meta">Gratuit · Open source · 100&nbsp;% hors ligne · <a href="https://github.com/MatthieuTinnes/CairnGPS/releases">ou l’APK sur GitHub</a></p>
+      </div>
+
+      <div class="globe">
+        <div class="globe-stage">
+          <canvas data-globe data-land="../assets/data/world_land.txt" role="img" aria-label="Globe 3D animé : satellites GNSS en orbite reliés à une position dans les Alpes"></canvas>
+          <div class="hud" aria-hidden="true">
+            <strong>Galileo 05</strong>
+            él. 52° · az. 187°<br>
+            43 dB-Hz
+          </div>
+        </div>
+        <ul class="legend" aria-label="Constellations">
+          <li><span class="dot" style="--c: #5c9ce6" aria-hidden="true"></span>GPS</li>
+          <li><span class="dot" style="--c: #e06666" aria-hidden="true"></span>GLONASS</li>
+          <li><span class="dot" style="--c: #3ec9c0" aria-hidden="true"></span>Galileo</li>
+          <li><span class="dot" style="--c: #f0954b" aria-hidden="true"></span>BeiDou</li>
+          <li><span class="dot" style="--c: #9b7be0" aria-hidden="true"></span>QZSS</li>
+          <li><span class="dot dot--you" style="--c: #f26a1b" aria-hidden="true"></span>Vous</li>
+        </ul>
+        <p class="hint">Faites glisser le globe pour le faire tourner</p>
+      </div>
+    </section>
+  </div>
+
+  <main id="main">
+    <section class="wrap" aria-label="En bref">
+      <dl class="facts">
+        <div><dt>constellations suivies</dt><dd>6</dd></div>
+        <div><dt>succès à débloquer</dt><dd>66</dd></div>
+        <div><dt>compte, pub ou traqueur</dt><dd>0</dd></div>
+        <div><dt>hors ligne</dt><dd>100&nbsp;%</dd></div>
+      </dl>
+    </section>
+
+    <div class="tour wrap" id="fonctionnalites">
+      <section class="feature" aria-labelledby="f-position">
+        <div class="phones">
+          <figure class="phone"><img src="../assets/img/screens/fr/1.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Écran Position : coordonnées, vitesse, altitude, précision et enregistrement en cours"></figure>
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">01 · Position</p>
+          <h2 id="f-position">Sachez quelle confiance accorder à votre fix.</h2>
+          <p>Coordonnées décimales ou DMS, altitude corrigée du géoïde EGM96, vitesse en km/h et m/s. La précision horizontale et verticale s’affiche avec un code couleur lisible en plein soleil.</p>
+          <ul class="quality">
+            <li><span class="dot" style="--c: #3e9b42" aria-hidden="true"></span><span class="range">&lt; 5 m</span><span class="label">précis</span></li>
+            <li><span class="dot" style="--c: #f29a1f" aria-hidden="true"></span><span class="range">5–15 m</span><span class="label">correct</span></li>
+            <li><span class="dot" style="--c: #c62828" aria-hidden="true"></span><span class="range">&gt; 15 m</span><span class="label">dégradé</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="feature feature--reverse" aria-labelledby="f-satellites">
+        <div class="phones phones--pair">
+          <figure class="phone"><img src="../assets/img/screens/fr/3.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Écran Satellites en 3D : globe et satellites visibles"></figure>
+          <figure class="phone"><img src="../assets/img/screens/fr/2.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Écran Satellites : diagramme du ciel et liste des satellites GPS"></figure>
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">02 · Satellites</p>
+          <h2 id="f-satellites">Le ciel, en trois vues.</h2>
+          <p>GPS, GLONASS, Galileo, BeiDou, QZSS, IRNSS&nbsp;: voyez quels satellites vous localisent, d’où viennent leurs signaux et lesquels servent au fix.</p>
+          <ol class="views">
+            <li><span class="num">01</span><span><strong>Globe 3D</strong><span>La géométrie réelle de la constellation au-dessus de vous.</span></span></li>
+            <li><span class="num">02</span><span><strong>Diagramme du ciel</strong><span>Azimut et élévation de chaque satellite.</span></span></li>
+            <li><span class="num">03</span><span><strong>Liste détaillée</strong><span>Constellation, force du signal, satellites utilisés.</span></span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="feature" aria-labelledby="f-traces">
+        <div class="phones phones--pair">
+          <figure class="phone"><img src="../assets/img/screens/fr/5.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Détail d’une trace : parcours, statistiques, profils d’altitude et de vitesse"></figure>
+          <figure class="phone"><img src="../assets/img/screens/fr/7.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Carnet de route : liste des traces enregistrées"></figure>
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">03 · Traces &amp; carnet</p>
+          <h2 id="f-traces">Rangez le téléphone, il garde la trace.</h2>
+          <p>L’enregistrement continue écran éteint&nbsp;: distance, durée, vitesses moyenne et max, dénivelés positif et négatif. Chaque sortie rejoint votre carnet de route avec profils d’altitude et de vitesse, repères et export GPX.</p>
+          <ul class="tags">
+            <li>Distance</li>
+            <li>D+ / D−</li>
+            <li>Profil altimétrique</li>
+            <li>Repères</li>
+            <li>Export GPX</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="feature feature--reverse" aria-labelledby="f-boussole">
+        <div class="phones">
+          <figure class="phone"><img src="../assets/img/screens/fr/6.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Écran Boussole : cadran, déclinaison et navigation vers un repère"></figure>
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">04 · Boussole</p>
+          <h2 id="f-boussole">Le cap, et le chemin vers vos repères.</h2>
+          <p>Nord magnétique ou géographique, avec une déclinaison calculée localement. Choisissez un repère&nbsp;: flèche, distance et azimut vous y guident.</p>
+        </div>
+      </section>
+
+      <section class="feature" aria-labelledby="f-succes">
+        <div class="phones">
+          <figure class="phone"><img src="../assets/img/screens/fr/4.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Écran Succès : prochain succès et grille des succès d’altitude"></figure>
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">05 · Succès</p>
+          <h2 id="f-succes">66 succès pour pimenter vos sorties.</h2>
+          <p>Du premier sommet au Kilimandjaro, du 45<sup>e</sup> parallèle au repère posé avant 6&nbsp;h du matin. Chaque succès rapporte de l’XP, et vos records personnels vous suivent d’une sortie à l’autre.</p>
+          <ul class="tags tags--warm">
+            <li>Altitude</li>
+            <li>Vitesse</li>
+            <li>Satellites</li>
+            <li>Distance</li>
+            <li>Sorties</li>
+            <li>Défis spéciaux</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <section class="privacy" id="vie-privee" aria-labelledby="privacy-title">
+      <div class="wrap">
+        <div class="privacy-copy">
+          <p class="eyebrow">Vie privée</p>
+          <h2 id="privacy-title">Vos traces restent sur votre téléphone.</h2>
+          <p>CairnGPS lit le GPS brut via les API Android, sans services Google Play, sans Firebase et sans bibliothèque de suivi. Aucun compte, aucune connexion requise. <a href="https://matthieu.app/cairngps/privacy/" hreflang="en">Politique de confidentialité</a> (en anglais).</p>
+        </div>
+        <ul class="checks">
+          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffa36b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Logiciel libre sous licence AGPL-3.0</li>
+          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffa36b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Aucune donnée envoyée, tout reste sur l’appareil</li>
+          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffa36b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Sauvegarde et restauration dans un seul fichier</li>
+          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffa36b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Thèmes clair et sombre, lisible en plein soleil</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <aside class="note" aria-label="À noter">
+        <strong>À noter</strong>
+        <p>CairnGPS n’est pas une application de cartographie&nbsp;: pas de fond de carte ni de calcul d’itinéraire. Elle complète votre appli de cartes plutôt qu’elle ne la remplace.</p>
+      </aside>
+    </div>
+
+    <section class="cta wrap" id="telecharger" aria-labelledby="cta-title">
+      <img src="../assets/img/icon.png" alt="" width="104" height="104" loading="lazy">
+      <h2 id="cta-title">Emportez le ciel <em>avec vous.</em></h2>
+      <p>Gratuit et open source, pour Android 8.0 et plus.</p>
+      <div class="stores">
+        <a href="https://play.google.com/store/apps/details?id=app.matthieu.cairngps"><img src="../assets/img/badges/google-play-fr.png" alt="Disponible sur Google Play" width="646" height="250" loading="lazy"></a>
+        <a href="https://f-droid.org/packages/app.matthieu.cairngps/"><img src="../assets/img/badges/fdroid-fr.png" alt="Disponible sur F-Droid" width="646" height="250" loading="lazy"></a>
+      </div>
+      <a class="apk" href="https://github.com/MatthieuTinnes/CairnGPS/releases">ou téléchargez l’APK sur GitHub</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Matthieu Tinnes · Logiciel libre sous licence AGPL-3.0</span>
+      <ul>
+        <li><a href="https://github.com/MatthieuTinnes/CairnGPS">Code source</a></li>
+        <li><a href="https://matthieu.app/cairngps/privacy/" hreflang="en">Confidentialité</a></li>
+        <li><a href="https://www.naturalearthdata.com/">Données terrestres : Natural Earth</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

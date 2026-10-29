@@ -1,0 +1,10 @@
+# Aperçu local du site tel qu'il est servi en prod (nginx), sur
+# http://localhost:8080. Le déploiement en prod passe par
+# deploy/docker-compose.yml (stack Komodo `cairngps-website`), pas par ce fichier.
+name: cairngps-website-local
+
+services:
+  cairngps-website:
+    build: .
+    ports:
+      - "8080:80"

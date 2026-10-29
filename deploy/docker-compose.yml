@@ -1,0 +1,22 @@
+name: cairngps-website
+
+services:
+  cairngps-website:
+    container_name: cairngps-website
+    image: ghcr.io/matthieutinnes/cairngps-website:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+      - "traefik.http.services.cairngps-website.loadbalancer.server.port=80"
+      - "traefik.http.routers.cairngps-website.rule=Host(`${CAIRNGPS_DOMAIN:?CAIRNGPS_DOMAIN est requis}`)"
+      - "traefik.http.routers.cairngps-website.entrypoints=https"
+      - "traefik.http.routers.cairngps-website.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.cairngps-website.service=cairngps-website"
+      - "traefik.http.routers.cairngps-website.middlewares=${TRAEFIK_MIDDLEWARES:?TRAEFIK_MIDDLEWARES est requis}"
+
+networks:
+  web:
+    external: true
