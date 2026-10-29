@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="../assets/img/icon.png">
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../assets/css/styles.css?v=2">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=4">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CairnGPS">
@@ -45,7 +45,7 @@
   </script>
 
   <script src="../assets/js/site.js?v=1" defer></script>
-  <script src="../assets/js/globe.js?v=1" defer></script>
+  <script src="../assets/js/globe.js?v=3" defer></script>
   <!-- Cookie-less audience stats (self-hosted Umami); the page works without it. -->
   <script defer src="https://umami.matthieu.app/js/app.js" data-host-url="https://umami.matthieu.app" data-website-id="695b13a4-3913-4c51-99ee-1c3db1899db5" data-domains="cairngps.matthieu.app"></script>
 </head>
@@ -95,11 +95,11 @@
 
       <div class="globe">
         <div class="globe-stage">
-          <canvas data-globe data-land="../assets/data/world_land.txt" role="img" aria-label="Globe 3D animé : satellites GNSS en orbite reliés à une position dans les Alpes"></canvas>
-          <div class="hud" aria-hidden="true">
-            <strong>Galileo 05</strong>
-            él. 52° · az. 187°<br>
-            43 dB-Hz
+          <canvas data-globe data-land="../assets/data/world_land.txt" data-elaz-label="él. {el}° · az. {az}°" tabindex="0" role="img" aria-label="Globe 3D interactif : satellites GNSS utilisés pour le fix, reliés à une position dans les Alpes. Flèches pour tourner, + et − pour zoomer."></canvas>
+          <div class="sat-tooltip" data-sat-tooltip role="status" hidden>
+            <strong></strong>
+            <span></span>
+            <span></span>
           </div>
         </div>
         <ul class="legend" aria-label="Constellations">
@@ -107,10 +107,9 @@
           <li><span class="dot" style="--c: #e06666" aria-hidden="true"></span>GLONASS</li>
           <li><span class="dot" style="--c: #3ec9c0" aria-hidden="true"></span>Galileo</li>
           <li><span class="dot" style="--c: #f0954b" aria-hidden="true"></span>BeiDou</li>
-          <li><span class="dot" style="--c: #9b7be0" aria-hidden="true"></span>QZSS</li>
           <li><span class="dot dot--you" style="--c: #f26a1b" aria-hidden="true"></span>Vous</li>
         </ul>
-        <p class="hint">Faites glisser le globe pour le faire tourner</p>
+        <p class="hint">Faites glisser pour tourner, pincez pour zoomer, touchez un satellite pour ses infos</p>
       </div>
     </section>
   </div>

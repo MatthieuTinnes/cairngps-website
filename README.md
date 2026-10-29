@@ -29,6 +29,12 @@ nginx/default.conf  Configuration nginx de l'image (gzip, cache, 404)
 Les deux pages ont la même structure : toute modification de contenu se fait dans
 `fr/index.html` **et** `en/index.html`.
 
+`globe.js` reprend le globe de l'app (`SatelliteGlobeScreen.kt` / `GlobeRendering.kt`) : même
+projection orthographique, mêmes gestes (glisser pour tourner, pincer ou ctrl + molette pour
+zoomer, toucher un satellite pour afficher ses infos) et mêmes règles de dessin. Le ciel est
+celui du mode démo de l'app (`DemoGpsSource.kt`), rafraîchi une fois par seconde ; seuls les
+satellites utilisés pour le fix sont affichés. Une évolution du globe dans l'app se reporte ici.
+
 Les captures viennent de l'app (1080 × 2400, sans cadre) : `assets/img/screens/<langue>/<n>.png`,
 dans l'ordre Position, Satellites, Globe 3D, Succès, Détail d'une trace, Boussole, Carnet.
 
