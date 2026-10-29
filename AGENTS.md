@@ -25,6 +25,9 @@ it up to date when a change affects the structure, the conventions or the deploy
   tag in both pages (and in `404.html` for the stylesheet) so browsers fetch the new version.
 - Claims about the app (achievement count, constellations, features) must match the CairnGPS
   repository; don't invent figures.
+- SEO metadata lives in each page's `<head>` (title, description, Open Graph, JSON-LD) and in
+  `sitemap.xml`: a content change updates the matching metadata, the `FAQPage` JSON-LD stays
+  word for word in sync with the visible FAQ, and the page's `<lastmod>` is bumped (README, SEO).
 
 ## Deployment
 

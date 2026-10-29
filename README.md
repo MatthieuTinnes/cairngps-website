@@ -17,12 +17,16 @@ index.html          Redirects to /fr/ or /en/ (remembered choice, otherwise the 
 fr/index.html       French page
 en/index.html       English page
 404.html            Not found page (bilingual)
+favicon.ico         48 and 32 px favicon, requested at the root by browsers and crawlers
+robots.txt          Allows everything and points to the sitemap
+sitemap.xml         Both pages with their hreflang alternates and screenshots
+site.webmanifest    Name, colours, icons and links to the store listings
 assets/css/         styles.css
 assets/js/          globe.js (3D globe in the hero), site.js (remembers the language)
 assets/fonts/       Fraunces, Manrope, Roboto Mono as woff2 (see LICENSES.md)
-assets/img/         Icon, social preview image, official badges, fr/ and en/ screenshots
+assets/img/         Icon (icon.png + icons/ sizes), social preview images, official badges, screenshots
 assets/data/        world_land.txt: Natural Earth 1:110m landmasses, the same file as the app
-nginx/default.conf  nginx configuration of the image (gzip, caching, 404)
+nginx/default.conf  nginx configuration of the image (gzip, caching, /index.html redirect, 404)
 ```
 
 Both pages share the same structure: any content change goes into `fr/index.html` **and**
@@ -34,8 +38,21 @@ satellite to show its details) and same drawing rules. The sky is the app's demo
 (`DemoGpsSource.kt`), refreshed once a second; only the satellites used in the fix are shown.
 Changes to the globe in the app should be carried over here.
 
-Screenshots come from the app (1080 × 2400, unframed): `assets/img/screens/<lang>/<n>.png`, in
+Screenshots come from the app (1080 × 2400, unframed), resized to 600 and 900 px wide JPEGs
+(quality ~86) for the `srcset`: `assets/img/screens/<lang>/<n>-600.jpg` and `<n>-900.jpg`, in
 this order: Position, Satellites, 3D globe, Achievements, Track detail, Compass, Logbook.
+
+## SEO
+
+- Each page has its own title, description, canonical URL, `hreflang` alternates (`fr`, `en`,
+  `x-default` = the root), Open Graph / Twitter tags and JSON-LD (`WebSite`, `WebPage`,
+  `MobileApplication`, `FAQPage`). The root page carries preview tags too: social crawlers don't
+  run its redirect script.
+- The FAQ exists twice in each page, as visible `<details>` and in the `FAQPage` JSON-LD: keep
+  both in sync, word for word.
+- When a page's content changes, update its `<lastmod>` in `sitemap.xml`.
+- After the first deployment, submit `https://cairngps.matthieu.app/sitemap.xml` in Google Search
+  Console and Bing Webmaster Tools.
 
 ## Running the site
 

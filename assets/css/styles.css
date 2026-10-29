@@ -275,6 +275,14 @@ a:hover {
   letter-spacing: -0.02em;
 }
 
+/* The eyebrow sits inside the h1 so the title carries the app name and category. */
+.hero h1 .eyebrow {
+  display: block;
+  margin-bottom: 28px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
 .hero h1 em,
 .privacy h2 em {
   color: var(--peach);
@@ -625,6 +633,89 @@ a:hover {
   border-color: var(--apricot-line);
   background: var(--apricot);
   color: var(--rust);
+}
+
+/* ---------- FAQ ---------- */
+
+.faq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px 72px;
+  padding-top: 32px;
+  padding-bottom: 112px;
+}
+
+.faq-intro {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.6vw, 48px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.faq-list {
+  flex: 2 1 560px;
+  min-width: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 18px 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: '+';
+  flex: none;
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--clay);
+  transition: transform 0.2s ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq details p {
+  margin: 0 0 22px;
+  max-width: 720px;
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq summary::after {
+    transition: none;
+  }
 }
 
 /* ---------- Privacy ---------- */

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://cairngps.matthieu.app/fr/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cairngps.matthieu.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cairngps.matthieu.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cairngps.matthieu.app/"/>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/fr/1-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/fr/2-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/fr/3-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/fr/4-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/fr/5-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/fr/6-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/fr/7-900.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://cairngps.matthieu.app/en/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cairngps.matthieu.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cairngps.matthieu.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cairngps.matthieu.app/"/>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/en/1-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/en/2-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/en/3-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/en/4-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/en/5-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/en/6-900.jpg</image:loc></image:image>
+    <image:image><image:loc>https://cairngps.matthieu.app/assets/img/screens/en/7-900.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://cairngps.matthieu.app/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cairngps.matthieu.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cairngps.matthieu.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cairngps.matthieu.app/"/>
+  </url>
+</urlset>

@@ -3,44 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CairnGPS — GNSS receiver and hiking logbook for Android</title>
-  <meta name="description" content="CairnGPS turns your phone into a GNSS receiver: precise position, live satellites on a 3D globe, hike tracks and achievements. Free, open source, no account, 100% offline.">
+  <title>CairnGPS – Offline hiking GPS &amp; 3D GNSS satellite viewer</title>
+  <meta name="description" content="Free, open-source Android app: precise GPS position, live GNSS satellites on a 3D globe, hiking tracks, compass and achievements. Works 100% offline, no account.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Matthieu Tinnes">
+  <meta name="application-name" content="CairnGPS">
   <meta name="theme-color" content="#0d3b30">
   <link rel="canonical" href="https://cairngps.matthieu.app/en/">
   <link rel="alternate" hreflang="fr" href="https://cairngps.matthieu.app/fr/">
   <link rel="alternate" hreflang="en" href="https://cairngps.matthieu.app/en/">
   <link rel="alternate" hreflang="x-default" href="https://cairngps.matthieu.app/">
-  <link rel="icon" type="image/png" href="../assets/img/icon.png">
-  <link rel="apple-touch-icon" href="../assets/img/icon.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="96x96" href="../assets/img/icons/icon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/img/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/icon-180.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="../assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../assets/css/styles.css?v=4">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=5">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CairnGPS">
-  <meta property="og:title" content="CairnGPS — Know where your signal comes from">
+  <meta property="og:title" content="CairnGPS – Know where your GPS signal comes from">
   <meta property="og:description" content="GNSS receiver and hiking logbook for Android: live satellites on a 3D globe, tracks, compass and achievements. Free, open source, offline.">
   <meta property="og:url" content="https://cairngps.matthieu.app/en/">
   <meta property="og:image" content="https://cairngps.matthieu.app/assets/img/og-en.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="CairnGPS, GNSS receiver and hiking logbook for Android">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CairnGPS – Know where your GPS signal comes from">
+  <meta name="twitter:description" content="GNSS receiver and hiking logbook for Android: live satellites on a 3D globe, tracks, compass and achievements. Free, open source, offline.">
+  <meta name="twitter:image" content="https://cairngps.matthieu.app/assets/img/og-en.png">
+  <meta name="twitter:image:alt" content="CairnGPS, GNSS receiver and hiking logbook for Android">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "CairnGPS",
-    "operatingSystem": "Android 8.0+",
-    "applicationCategory": "TravelApplication",
-    "inLanguage": ["en", "fr"],
-    "license": "https://www.gnu.org/licenses/agpl-3.0.html",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "downloadUrl": "https://play.google.com/store/apps/details?id=app.matthieu.cairngps",
-    "image": "https://cairngps.matthieu.app/assets/img/icon.png",
-    "author": { "@type": "Person", "name": "Matthieu Tinnes", "url": "https://matthieu.app" }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://cairngps.matthieu.app/#website",
+        "url": "https://cairngps.matthieu.app/",
+        "name": "CairnGPS",
+        "inLanguage": ["fr", "en"],
+        "publisher": { "@id": "https://matthieu.app/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://matthieu.app/#person",
+        "name": "Matthieu Tinnes",
+        "url": "https://matthieu.app",
+        "sameAs": ["https://github.com/MatthieuTinnes"]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://cairngps.matthieu.app/en/#webpage",
+        "url": "https://cairngps.matthieu.app/en/",
+        "name": "CairnGPS – Offline hiking GPS & 3D GNSS satellite viewer",
+        "description": "Free, open-source Android app: precise GPS position, live GNSS satellites on a 3D globe, hiking tracks, compass and achievements. Works 100% offline, no account.",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://cairngps.matthieu.app/#website" },
+        "about": { "@id": "https://cairngps.matthieu.app/#app" },
+        "primaryImageOfPage": "https://cairngps.matthieu.app/assets/img/og-en.png"
+      },
+      {
+        "@type": "MobileApplication",
+        "@id": "https://cairngps.matthieu.app/#app",
+        "name": "CairnGPS",
+        "description": "GNSS receiver and hiking logbook for Android: real-time position and altitude, GPS, GLONASS, Galileo, BeiDou, QZSS and IRNSS satellites on a sky plot and a 3D globe, compass, track recording with GPX export, achievements and levels. Works fully offline.",
+        "url": "https://cairngps.matthieu.app/en/",
+        "image": "https://cairngps.matthieu.app/assets/img/icons/icon-512.png",
+        "operatingSystem": "Android",
+        "softwareRequirements": "Android 8.0 or later",
+        "applicationCategory": "TravelApplication",
+        "applicationSubCategory": "GPS / GNSS",
+        "inLanguage": ["fr", "en"],
+        "isAccessibleForFree": true,
+        "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "installUrl": "https://play.google.com/store/apps/details?id=app.matthieu.cairngps",
+        "downloadUrl": "https://f-droid.org/packages/app.matthieu.cairngps/",
+        "sameAs": [
+          "https://play.google.com/store/apps/details?id=app.matthieu.cairngps",
+          "https://f-droid.org/packages/app.matthieu.cairngps/",
+          "https://github.com/MatthieuTinnes/CairnGPS"
+        ],
+        "featureList": [
+          "Coordinates in decimal degrees and DMS",
+          "EGM96 geoid-corrected altitude",
+          "Colour-coded horizontal and vertical accuracy",
+          "Sky plot and 3D globe of GNSS satellites",
+          "Compass and waypoint navigation",
+          "Background track recording",
+          "Elevation and speed profiles, GPX export",
+          "66 achievements, levels and personal records",
+          "Works fully offline, no account, no trackers"
+        ],
+        "screenshot": [
+          "https://cairngps.matthieu.app/assets/img/screens/en/1-900.jpg",
+          "https://cairngps.matthieu.app/assets/img/screens/en/2-900.jpg",
+          "https://cairngps.matthieu.app/assets/img/screens/en/3-900.jpg",
+          "https://cairngps.matthieu.app/assets/img/screens/en/4-900.jpg",
+          "https://cairngps.matthieu.app/assets/img/screens/en/5-900.jpg",
+          "https://cairngps.matthieu.app/assets/img/screens/en/6-900.jpg",
+          "https://cairngps.matthieu.app/assets/img/screens/en/7-900.jpg"
+        ],
+        "author": { "@id": "https://matthieu.app/#person" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://cairngps.matthieu.app/en/#faq",
+        "inLanguage": "en",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does CairnGPS work without an internet connection?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your phone's GPS receives the satellites directly, with no mobile network or Wi-Fi. CairnGPS needs no connection for your position, the satellites or track recording: everything works offline, in the mountains as well as in airplane mode." } },
+          { "@type": "Question", "name": "How can I see the GPS satellites my phone receives?", "acceptedAnswer": { "@type": "Answer", "text": "The Satellites tab shows every satellite on a sky plot by azimuth and elevation, lists its signal strength, and places the constellation above you on a 3D globe. You see how many satellites are in view and how many are used to compute your position." } },
+          { "@type": "Question", "name": "Which satellite constellations are supported?", "acceptedAnswer": { "@type": "Answer", "text": "GPS (United States), GLONASS (Russia), Galileo (Europe), BeiDou (China), QZSS (Japan) and IRNSS/NavIC (India), depending on what your phone's GNSS chip receives." } },
+          { "@type": "Question", "name": "Why is the altitude accurate?", "acceptedAnswer": { "@type": "Answer", "text": "GPS measures a height above an ellipsoid, which can differ by several tens of metres from the altitude on maps. CairnGPS corrects it with the EGM96 geoid model to show the altitude above sea level." } },
+          { "@type": "Question", "name": "Does track recording continue with the screen off?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Once a session is started you can pocket your phone: recording continues in the background and a persistent notification shows it. It never starts on its own, only when you start it." } },
+          { "@type": "Question", "name": "Does CairnGPS replace a mapping app?", "acceptedAnswer": { "@type": "Answer", "text": "No: it shows no base map and does no routing. CairnGPS is a GNSS tool and logbook that complements your map app; GPX export lets you open your tracks in any software." } },
+          { "@type": "Question", "name": "Do I need Google services to use CairnGPS?", "acceptedAnswer": { "@type": "Answer", "text": "No. CairnGPS uses neither Google Play Services nor Firebase, so it also works on phones without Google services. It is available on Google Play, on F-Droid and as an APK on GitHub." } },
+          { "@type": "Question", "name": "Is CairnGPS free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes: free, with no ads or in-app purchases, and open source under the AGPL-3.0 licence. It runs on Android 8.0 and later." } }
+        ]
+      }
+    ]
   }
   </script>
 
@@ -67,11 +156,12 @@
 
     <header class="site-header wrap">
       <a class="brand" href="#top">
-        <img src="../assets/img/icon.png" alt="" width="40" height="40">
+        <img src="../assets/img/icons/icon-96.png" alt="" width="40" height="40">
         <span>CairnGPS</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
         <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
         <a href="#privacy">Privacy</a>
         <a href="#download">Download</a>
         <div class="lang-switch" role="group" aria-label="Language">
@@ -83,8 +173,7 @@
 
     <section class="hero-body wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">GNSS receiver &amp; hiking logbook · Android</p>
-        <h1 id="hero-title">Know where your <em>signal comes from.</em></h1>
+        <h1 id="hero-title"><span class="eyebrow">CairnGPS · GNSS receiver &amp; hiking logbook for Android</span> Know where your <em>signal comes from.</em></h1>
         <p class="lead">CairnGPS turns your phone into a real GNSS receiver: precise position, live satellites on a 3D globe, hike tracks and achievements to unlock. No account, no connection, no trackers.</p>
         <div class="stores">
           <a href="https://play.google.com/store/apps/details?id=app.matthieu.cairngps"><img src="../assets/img/badges/google-play-en.png" alt="Get it on Google Play" width="646" height="250"></a>
@@ -127,7 +216,7 @@
     <div class="tour wrap" id="features">
       <section class="feature" aria-labelledby="f-position">
         <div class="phones">
-          <figure class="phone"><img src="../assets/img/screens/en/1.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Position screen: coordinates, speed, altitude, accuracy and an active recording"></figure>
+          <figure class="phone"><img src="../assets/img/screens/en/1-600.jpg" srcset="../assets/img/screens/en/1-600.jpg 600w, ../assets/img/screens/en/1-900.jpg 900w" sizes="(max-width: 640px) 60vw, 290px" width="600" height="1333" loading="lazy" decoding="async" alt="CairnGPS Position screen: GPS coordinates, speed, altitude, accuracy and an active recording"></figure>
         </div>
         <div class="feature-copy">
           <p class="eyebrow">01 · Position</p>
@@ -143,8 +232,8 @@
 
       <section class="feature feature--reverse" aria-labelledby="f-satellites">
         <div class="phones phones--pair">
-          <figure class="phone"><img src="../assets/img/screens/en/3.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Satellites in 3D screen: globe and satellites in view"></figure>
-          <figure class="phone"><img src="../assets/img/screens/en/2.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Satellites screen: sky plot and list of GPS satellites"></figure>
+          <figure class="phone"><img src="../assets/img/screens/en/3-600.jpg" srcset="../assets/img/screens/en/3-600.jpg 600w, ../assets/img/screens/en/3-900.jpg 900w" sizes="(max-width: 640px) 42vw, 250px" width="600" height="1333" loading="lazy" decoding="async" alt="3D globe of the GNSS satellites in view in CairnGPS"></figure>
+          <figure class="phone"><img src="../assets/img/screens/en/2-600.jpg" srcset="../assets/img/screens/en/2-600.jpg 600w, ../assets/img/screens/en/2-900.jpg 900w" sizes="(max-width: 640px) 42vw, 250px" width="600" height="1333" loading="lazy" decoding="async" alt="CairnGPS Satellites screen: sky plot and list of GPS satellites"></figure>
         </div>
         <div class="feature-copy">
           <p class="eyebrow">02 · Satellites</p>
@@ -160,8 +249,8 @@
 
       <section class="feature" aria-labelledby="f-tracks">
         <div class="phones phones--pair">
-          <figure class="phone"><img src="../assets/img/screens/en/5.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Track detail: route, stats, altitude and speed profiles"></figure>
-          <figure class="phone"><img src="../assets/img/screens/en/7.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Logbook: list of recorded tracks"></figure>
+          <figure class="phone"><img src="../assets/img/screens/en/5-600.jpg" srcset="../assets/img/screens/en/5-600.jpg 600w, ../assets/img/screens/en/5-900.jpg 900w" sizes="(max-width: 640px) 42vw, 250px" width="600" height="1333" loading="lazy" decoding="async" alt="Hiking track detail: route, distance, elevation gain, altitude and speed profiles"></figure>
+          <figure class="phone"><img src="../assets/img/screens/en/7-600.jpg" srcset="../assets/img/screens/en/7-600.jpg 600w, ../assets/img/screens/en/7-900.jpg 900w" sizes="(max-width: 640px) 42vw, 250px" width="600" height="1333" loading="lazy" decoding="async" alt="CairnGPS logbook: list of recorded hiking tracks"></figure>
         </div>
         <div class="feature-copy">
           <p class="eyebrow">03 · Tracks &amp; logbook</p>
@@ -179,7 +268,7 @@
 
       <section class="feature feature--reverse" aria-labelledby="f-compass">
         <div class="phones">
-          <figure class="phone"><img src="../assets/img/screens/en/6.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Compass screen: dial, declination and navigation to a waypoint"></figure>
+          <figure class="phone"><img src="../assets/img/screens/en/6-600.jpg" srcset="../assets/img/screens/en/6-600.jpg 600w, ../assets/img/screens/en/6-900.jpg 900w" sizes="(max-width: 640px) 60vw, 290px" width="600" height="1333" loading="lazy" decoding="async" alt="CairnGPS compass: dial, magnetic declination and navigation to a waypoint"></figure>
         </div>
         <div class="feature-copy">
           <p class="eyebrow">04 · Compass</p>
@@ -190,7 +279,7 @@
 
       <section class="feature" aria-labelledby="f-achievements">
         <div class="phones">
-          <figure class="phone"><img src="../assets/img/screens/en/4.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Achievements screen: next achievement and grid of altitude achievements"></figure>
+          <figure class="phone"><img src="../assets/img/screens/en/4-600.jpg" srcset="../assets/img/screens/en/4-600.jpg 600w, ../assets/img/screens/en/4-900.jpg 900w" sizes="(max-width: 640px) 60vw, 290px" width="600" height="1333" loading="lazy" decoding="async" alt="CairnGPS Achievements screen: next achievement and altitude achievements to unlock"></figure>
         </div>
         <div class="feature-copy">
           <p class="eyebrow">05 · Achievements</p>
@@ -207,6 +296,47 @@
         </div>
       </section>
     </div>
+
+    <section class="faq wrap" id="faq" aria-labelledby="faq-title">
+      <div class="faq-intro">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title">Frequently asked questions</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Does CairnGPS work without an internet connection?</summary>
+          <p>Yes. Your phone’s GPS receives the satellites directly, with no mobile network or Wi-Fi. CairnGPS needs no connection for your position, the satellites or track recording: everything works offline, in the mountains as well as in airplane mode.</p>
+        </details>
+        <details>
+          <summary>How can I see the GPS satellites my phone receives?</summary>
+          <p>The Satellites tab shows every satellite on a sky plot by azimuth and elevation, lists its signal strength, and places the constellation above you on a 3D globe. You see how many satellites are in view and how many are used to compute your position.</p>
+        </details>
+        <details>
+          <summary>Which satellite constellations are supported?</summary>
+          <p>GPS (United States), GLONASS (Russia), Galileo (Europe), BeiDou (China), QZSS (Japan) and IRNSS/NavIC (India), depending on what your phone’s GNSS chip receives.</p>
+        </details>
+        <details>
+          <summary>Why is the altitude accurate?</summary>
+          <p>GPS measures a height above an ellipsoid, which can differ by several tens of metres from the altitude on maps. CairnGPS corrects it with the EGM96 geoid model to show the altitude above sea level.</p>
+        </details>
+        <details>
+          <summary>Does track recording continue with the screen off?</summary>
+          <p>Yes. Once a session is started you can pocket your phone: recording continues in the background and a persistent notification shows it. It never starts on its own, only when you start it.</p>
+        </details>
+        <details>
+          <summary>Does CairnGPS replace a mapping app?</summary>
+          <p>No: it shows no base map and does no routing. CairnGPS is a GNSS tool and logbook that complements your map app; GPX export lets you open your tracks in any software.</p>
+        </details>
+        <details>
+          <summary>Do I need Google services to use CairnGPS?</summary>
+          <p>No. CairnGPS uses neither Google Play Services nor Firebase, so it also works on phones without Google services. It is available on Google Play, on F-Droid and as an APK on GitHub.</p>
+        </details>
+        <details>
+          <summary>Is CairnGPS free?</summary>
+          <p>Yes: free, with no ads or in-app purchases, and open source under the AGPL-3.0 licence. It runs on Android 8.0 and later.</p>
+        </details>
+      </div>
+    </section>
 
     <section class="privacy" id="privacy" aria-labelledby="privacy-title">
       <div class="wrap">
@@ -232,7 +362,7 @@
     </div>
 
     <section class="cta wrap" id="download" aria-labelledby="cta-title">
-      <img src="../assets/img/icon.png" alt="" width="104" height="104" loading="lazy">
+      <img src="../assets/img/icons/icon-512.png" alt="" width="104" height="104" loading="lazy">
       <h2 id="cta-title">Take the sky <em>with you.</em></h2>
       <p>Free and open source, for Android 8.0 and up.</p>
       <div class="stores">
