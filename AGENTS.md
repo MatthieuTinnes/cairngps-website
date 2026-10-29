@@ -7,13 +7,13 @@ Static, bilingual (French / English) marketing site for the CairnGPS Android app
 HTML / CSS / JavaScript: no dependency, no build step, no external resource — fonts and store
 badges are self-hosted. The only exception is the self-hosted, cookie-less Umami tracker
 (`umami.matthieu.app`) loaded with `defer` in both pages: the site works without it. The project context (contents,
-local preview, deployment) is in the [README.md](README.md) (in French): read it first, and keep
+local preview, deployment) is in the [README.md](README.md): read it first, and keep
 it up to date when a change affects the structure, the conventions or the deployment.
 
 ## Conventions
 
 - Code and code comments are in **English**, CI workflows included (comments, step names, error
-  messages). The README stays in **French**.
+  messages), and so is the README.
 - `fr/index.html` and `en/index.html` share the same structure: a content or markup change goes
   into both, and their `hreflang` / canonical links stay in sync.
 - Commits follow [Conventional Commits](https://www.conventionalcommits.org) (`feat: …`, `fix: …`,

@@ -1,91 +1,88 @@
-# Site de CairnGPS
+# CairnGPS website
 
-Site vitrine de [CairnGPS](https://github.com/MatthieuTinnes/CairnGPS), l'application Android
-de données GPS/GNSS en temps réel, de traces et de succès. En ligne sur
+Landing page for [CairnGPS](https://github.com/MatthieuTinnes/CairnGPS), the Android app for
+real-time GPS/GNSS data, track recording and achievements. Live at
 <https://cairngps.matthieu.app>.
 
-Site statique bilingue (français / anglais) en HTML / CSS / JavaScript vanilla. Aucune
-dépendance, aucun build, aucune ressource externe : polices et badges des stores sont
-hébergés avec le site. Seule exception : le script de statistiques Umami (auto-hébergé sur
-`umami.matthieu.app`, sans cookie) chargé en `defer` dans `fr/index.html` et `en/index.html` ;
-le site fonctionne sans lui. `data-domains` limite le comptage au domaine de prod, les aperçus
-locaux ne sont donc pas comptés.
+Static bilingual (French / English) site in vanilla HTML / CSS / JavaScript. No dependency, no
+build step, no external resource: fonts and store badges are hosted with the site. The only
+exception is the Umami analytics script (self-hosted on `umami.matthieu.app`, cookie-less),
+loaded with `defer` in `fr/index.html` and `en/index.html`; the site works without it.
+`data-domains` limits tracking to the production domain, so local previews are not counted.
 
-## Contenu
+## Contents
 
 ```
-index.html          Redirige vers /fr/ ou /en/ (choix mémorisé, sinon langue du navigateur)
-fr/index.html       Page française
-en/index.html       Page anglaise
-404.html            Page introuvable (bilingue)
+index.html          Redirects to /fr/ or /en/ (remembered choice, otherwise the browser language)
+fr/index.html       French page
+en/index.html       English page
+404.html            Not found page (bilingual)
 assets/css/         styles.css
-assets/js/          globe.js (globe 3D du haut de page), site.js (mémorise la langue)
-assets/fonts/       Fraunces, Manrope, Roboto Mono en woff2 (voir LICENSES.md)
-assets/img/         Icône, image de partage, badges officiels, captures d'écran fr/ et en/
-assets/data/        world_land.txt : continents Natural Earth 1:110m, le même fichier que l'app
-nginx/default.conf  Configuration nginx de l'image (gzip, cache, 404)
+assets/js/          globe.js (3D globe in the hero), site.js (remembers the language)
+assets/fonts/       Fraunces, Manrope, Roboto Mono as woff2 (see LICENSES.md)
+assets/img/         Icon, social preview image, official badges, fr/ and en/ screenshots
+assets/data/        world_land.txt: Natural Earth 1:110m landmasses, the same file as the app
+nginx/default.conf  nginx configuration of the image (gzip, caching, 404)
 ```
 
-Les deux pages ont la même structure : toute modification de contenu se fait dans
-`fr/index.html` **et** `en/index.html`.
+Both pages share the same structure: any content change goes into `fr/index.html` **and**
+`en/index.html`.
 
-`globe.js` reprend le globe de l'app (`SatelliteGlobeScreen.kt` / `GlobeRendering.kt`) : même
-projection orthographique, mêmes gestes (glisser pour tourner, pincer ou ctrl + molette pour
-zoomer, toucher un satellite pour afficher ses infos) et mêmes règles de dessin. Le ciel est
-celui du mode démo de l'app (`DemoGpsSource.kt`), rafraîchi une fois par seconde ; seuls les
-satellites utilisés pour le fix sont affichés. Une évolution du globe dans l'app se reporte ici.
+`globe.js` is a port of the app's globe (`SatelliteGlobeScreen.kt` / `GlobeRendering.kt`): same
+orthographic projection, same gestures (drag to rotate, pinch or ctrl + wheel to zoom, tap a
+satellite to show its details) and same drawing rules. The sky is the app's demo-mode sky
+(`DemoGpsSource.kt`), refreshed once a second; only the satellites used in the fix are shown.
+Changes to the globe in the app should be carried over here.
 
-Les captures viennent de l'app (1080 × 2400, sans cadre) : `assets/img/screens/<langue>/<n>.png`,
-dans l'ordre Position, Satellites, Globe 3D, Succès, Détail d'une trace, Boussole, Carnet.
+Screenshots come from the app (1080 × 2400, unframed): `assets/img/screens/<lang>/<n>.png`, in
+this order: Position, Satellites, 3D globe, Achievements, Track detail, Compass, Logbook.
 
-## Lancer le site
+## Running the site
 
-Servir le dossier (le globe charge `world_land.txt` en `fetch`, ce qui ne marche pas en
-`file://`) :
+Serve the folder (the globe loads `world_land.txt` with `fetch`, which doesn't work over
+`file://`):
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Puis aller sur <http://localhost:8000>.
+Then open <http://localhost:8000>.
 
-## Déploiement
+## Deployment
 
-Le site est servi via Docker (nginx) derrière Traefik, sur `cairngps.matthieu.app`.
+The site is served with Docker (nginx) behind Traefik, on `cairngps.matthieu.app`.
 
-Chaque commit sur `main` déclenche `.github/workflows/deploy.yml` : l'image est construite
-et poussée sur GHCR (`ghcr.io/matthieutinnes/cairngps-website`, tags `latest` et
-`main-<sha>`), puis la CI appelle le webhook signé de la stack Komodo `cairngps-website`,
-qui récupère `deploy/docker-compose.yml` sur `main`, tire l'image et relance le conteneur.
-Pas de tag de version, pas de preprod.
+Every commit on `main` triggers `.github/workflows/deploy.yml`: the image is built and pushed
+to GHCR (`ghcr.io/matthieutinnes/cairngps-website`, tags `latest` and `main-<sha>`), then CI
+calls the signed webhook of the Komodo stack `cairngps-website`, which fetches
+`deploy/docker-compose.yml` from `main`, pulls the image and restarts the container. No version
+tag, no preprod.
 
-Secrets GitHub attendus dans l'environnement `prod` : `KOMODO_HOST`,
-`KOMODO_WEBHOOK_SECRET` (et, facultatif, `GOTIFY_HOST` / `GOTIFY_TOKEN` pour la
-notification). La stack Komodo est configurée hors de ce dépôt ; ses variables sont documentées dans
-`deploy/.env.example`.
+GitHub secrets expected in the `prod` environment: `KOMODO_HOST`, `KOMODO_WEBHOOK_SECRET`
+(and, optionally, `GOTIFY_HOST` / `GOTIFY_TOKEN` for the notification). The Komodo stack is
+configured outside this repository; its variables are documented in `deploy/.env.example`.
 
-Pour redéployer sans nouveau commit, ou pour le tout premier déploiement : lancer
-le workflow « Build & Deploy » à la main (Actions → Run workflow). Pour revenir à
-un build précédent : mettre `IMAGE_TAG=main-<sha>` dans l'environnement de la
-stack Komodo, puis Deploy.
+To redeploy without a new commit, or for the very first deployment: run the "Build & Deploy"
+workflow manually (Actions → Run workflow). To roll back to a previous build: set
+`IMAGE_TAG=main-<sha>` in the Komodo stack environment, then Deploy.
 
-Aperçu local du rendu final :
+Local preview of the production build:
 
 ```bash
 docker compose up --build
 ```
 
-Puis aller sur <http://localhost:8080>.
+Then open <http://localhost:8080>.
 
-À chaque modification de `styles.css`, `globe.js` ou `site.js`, incrémenter le paramètre
-`?v=` des balises correspondantes dans `fr/index.html`, `en/index.html` (et `404.html`
-pour la feuille de style) pour forcer les navigateurs à récupérer la nouvelle version.
+Whenever `styles.css`, `globe.js` or `site.js` changes, bump the `?v=` parameter of the
+matching tags in `fr/index.html`, `en/index.html` (and `404.html` for the stylesheet) so
+browsers fetch the new version.
 
-## Licence et crédits
+## License and credits
 
-Code du site sous licence [AGPL-3.0](LICENSE), comme l'application.
+The site's code is licensed under [AGPL-3.0](LICENSE), like the app.
 
-- Polices : Fraunces et Manrope (SIL Open Font License 1.1), Roboto Mono (Apache 2.0).
-- Continents : [Natural Earth](https://www.naturalearthdata.com/), domaine public.
-- Badges : Google Play est une marque de Google LLC ; badge F-Droid issu de
+- Fonts: Fraunces and Manrope (SIL Open Font License 1.1), Roboto Mono (Apache 2.0).
+- Landmasses: [Natural Earth](https://www.naturalearthdata.com/), public domain.
+- Badges: Google Play is a trademark of Google LLC; F-Droid badge from
   [fdroid/artwork](https://gitlab.com/fdroid/artwork).
