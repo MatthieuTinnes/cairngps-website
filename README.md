@@ -42,6 +42,24 @@ Screenshots come from the app (1080 × 2400, unframed), resized to 600 and 900 p
 (quality ~86) for the `srcset`: `assets/img/screens/<lang>/<n>-600.jpg` and `<n>-900.jpg`, in
 this order: Position, Satellites, 3D globe, Achievements, Track detail, Compass, Logbook.
 
+## Analytics events
+
+Clicks on the download and source code links are tracked with Umami's declarative attributes: a
+`data-umami-event` name and a `data-umami-event-location` property on the `<a>`. No JavaScript is
+involved, and the links work normally without the tracker.
+
+| Target | `data-umami-event` | `data-umami-event-location` |
+|---|---|---|
+| Google Play | `download-google-play` | `hero` / `download` |
+| F-Droid | `download-fdroid` | `hero` / `download` |
+| GitHub APK | `download-apk` | `hero` / `download` |
+| Source code | `source-code` | `footer` |
+
+To track a new link, add both attributes in `fr/index.html` **and** `en/index.html`: one event
+name per target (50 characters max), and `location` for where the link sits. There is no language
+property: the page URL (`/fr/` or `/en/`) already tells. Privacy, Natural Earth, navigation and
+language switch links are not tracked.
+
 ## SEO
 
 - Each page has its own title, description, canonical URL, `hreflang` alternates (`fr`, `en`,
