@@ -17,9 +17,10 @@ index.html          Redirects to /fr/ or /en/ (remembered choice, otherwise the 
 fr/index.html       French page
 en/index.html       English page
 404.html            Not found page (bilingual)
+privacy/index.html  Privacy policy at /privacy/: one bilingual page, English (#en) then French (#fr)
 favicon.ico         48 and 32 px favicon, requested at the root by browsers and crawlers
 robots.txt          Allows everything and points to the sitemap
-sitemap.xml         Both pages with their hreflang alternates and screenshots
+sitemap.xml         Both pages with their hreflang alternates and screenshots, plus /privacy/
 site.webmanifest    Name, colours, icons and links to the store listings
 assets/css/         styles.css
 assets/js/          globe.js (3D globe in the hero), site.js (remembers the language)
@@ -110,7 +111,7 @@ docker compose up --build
 Then open <http://localhost:8080>.
 
 Whenever `styles.css`, `globe.js` or `site.js` changes, bump the `?v=` parameter of the
-matching tags in `fr/index.html`, `en/index.html` (and `404.html` for the stylesheet) so
+matching tags in `fr/index.html`, `en/index.html` (and `404.html` and `privacy/index.html` for the stylesheet) so
 browsers fetch the new version.
 
 ## License and credits
