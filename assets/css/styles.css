@@ -893,6 +893,47 @@ a:hover {
   list-style: none;
 }
 
+/* ---------- Privacy policy page ---------- */
+
+.legal {
+  padding-top: 56px;
+  padding-bottom: 72px;
+  max-width: 760px;
+}
+
+.legal-langs {
+  display: flex;
+  gap: 8px 24px;
+  margin: 0 0 48px;
+  padding: 0;
+  list-style: none;
+  font-weight: 600;
+}
+
+.legal section + section {
+  margin-top: 72px;
+  padding-top: 48px;
+  border-top: 1px solid var(--rule);
+}
+
+.legal h1 {
+  margin: 0 0 24px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(32px, 4.5vw, 48px);
+  line-height: 1.15;
+}
+
+.legal p {
+  color: var(--text);
+}
+
+.legal .updated {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
 /* ---------- Small screens ---------- */
 
 @media (max-width: 640px) {
